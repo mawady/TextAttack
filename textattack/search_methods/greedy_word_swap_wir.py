@@ -98,7 +98,10 @@ class GreedyWordSwapWIR(SearchMethod):
                 if not matched_tokens:
                     index_scores[i] = 0.0
                 else:
-                    agg_grad = np.mean(gradient[matched_tokens], axis=0)
+                    try:
+                        agg_grad = np.mean(gradient[matched_tokens], axis=0)
+                    except:
+                        index_scores[i] = 0.0
                     index_scores[i] = np.linalg.norm(agg_grad, ord=1)
 
             search_over = False
